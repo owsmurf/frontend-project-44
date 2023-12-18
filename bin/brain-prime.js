@@ -3,25 +3,31 @@
 /* eslint-disable no-console */
 import readlineSync from 'readline-sync';
 
-function playProgression() {
+function isPrime(number) {
+  if (number < 2) {
+    return false;
+  }
+  for (let i = 2; i <= Math.sqrt(number); i += 1) {
+    if (number % i === 0) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function playPrime() {
   console.log('Welcome to the Brain Games!');
   const name = readlineSync.question('May I have your name? ');
   console.log(`Hello, ${name}!`);
-  console.log('What number is missing in the progression?');
-  const arrays = [
-    [5, 7, 9, 11, 13, 15, 17, 19, 21, 23],
-    [2, 5, 8, 11, 14, 17, 20, 23, 26, 29],
-    [2, 3, 5, 8, 12, 17, 23, 30, 38, 47],
-  ];
+  console.log('Answer "yes" if given number is prime. Otherwise answer "no".');
 
   for (let i = 0; i < 3; i += 1) {
-    const randomNum = Math.floor(Math.random() * 9) + 1;
-    const newArr = arrays[i];
-    const correctAnswer = newArr[randomNum];
-    newArr[randomNum] = '..';
-    console.log(`Question: ${newArr}`);
+    const randomNum = Math.floor(Math.random() * 35) + 1;
+    console.log(`Question: ${randomNum}`);
     const userAnswer = readlineSync.question('Your answer: ');
-    if (Number(userAnswer) !== correctAnswer) {
+    const correctAnswer = isPrime(randomNum) ? 'yes' : 'no';
+
+    if (userAnswer !== correctAnswer) {
       console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
       console.log(`Let's try again, ${name}!`);
       return;
@@ -33,4 +39,4 @@ function playProgression() {
   console.log(`Congratulations, ${name}! You won!`);
 }
 
-playProgression();
+playPrime();
