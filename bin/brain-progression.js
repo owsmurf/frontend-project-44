@@ -19,7 +19,7 @@ function playProgression() {
     const newArr = arrays[i];
     const correctAnswer = newArr[randomNum];
     newArr[randomNum] = '..';
-    console.log(`Question: ${newArr}`);
+    console.log(`Question: ${newArr.join(', ')}`);
     const userAnswer = readlineSync.question('Your answer: ');
     if (Number(userAnswer) !== correctAnswer) {
       console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
